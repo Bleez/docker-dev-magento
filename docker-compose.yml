@@ -1,0 +1,152 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # user: ${USERID}
+    
+    container_name: pacotes-bleez-app
+    
+    restart: unless-stopped
+    
+    tty: true
+    
+    # environment:
+      # SERVICE_NAME: app
+      # SERVICE_TAGS: dev
+      # XDEBUG_CONFIG: remotehost=${REMOTE_HOST}
+      # PHP_IDE_CONFIG: serverName=${SERVER_NAME}
+    
+    working_dir: /var/www/
+    
+    volumes:
+    - app-sync:/var/www/:delegated
+    - ./config/php.ini:/usr/local/etc/php/php.ini
+    # # - ./config/custom-xdebug.ini:/usr/local/etc/php/conf.d/custom-xdebug.ini
+    - ./bin/install-magento2:/usr/local/bin/install-magento2
+    - ./bin/redis-flush:/usr/local/bin/redis-flush
+    - ./bin/setup-cron:/usr/local/bin/setup-cron
+    - ./bin/xdebug:/usr/local/bin/xdebug
+    # - ./users/env.sample.php:/var/www/app/etc/env.sample.php
+    
+    networks:
+    - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    
+    container_name: pacotes-bleez-nginx
+    
+    restart: unless-stopped
+    
+    tty: true
+    
+    working_dir: /var/www/
+    
+    ports:
+    - "80:80"
+    - "443:443"
+    
+    volumes:
+    # - ./nginx/logs:/var/log/nginx
+    - app-sync:/var/www/:delegated
+    - ./config/magento.conf:/etc/nginx/conf.d/default.conf
+    
+    networks:
+    - app-network
+  
+    links:
+    - "app"
+
+  db:
+    image: mariadb
+    # image: mysql:5.7.22
+
+    ports:
+      - ${DB_PORT}:3306
+    
+    restart: unless-stopped
+    
+    container_name: pacotes-bleez-db
+      
+    tty: true
+
+    environment:
+    - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    - MYSQL_DATABASE=magento
+    - MYSQL_USER=magento
+    - MYSQL_PASSWORD=magento
+  
+    volumes:
+    - dbdata:/var/lib/mysql
+    # - ./mysql/my.cnf:/etc/mysql/my.cnf
+  
+    networks:
+    - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    
+    environment:
+    - PMA_HOST=db
+    - PMA_USER=root
+    - PMA_PASSWORD=root
+    - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    
+    ports:
+    - 8080:80
+  
+    networks:
+    - app-network
+
+  redis:
+    image: redis
+
+    container_name: pacotes-bleez-redis
+    
+    ports:
+    - 6379
+    
+    networks:
+    - app-network
+
+  redis-session:
+    image: redis
+
+    container_name: pacotes-bleez-redis-session
+    
+    ports:
+    - 6379
+    
+    networks:
+    - app-network
+
+  mailhog:
+    image: mailhog/mailhog
+    
+    ports:
+    - 1025:1025
+    - 8025:8025
+    
+    networks:
+    - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  
+  dbdata:
+    driver: local
+  
+  app-sync:
+    driver_opts:
+        type: "nfs"
+        o: addr=${REMOTE_HOST},rw,nolock,hard,nointr,nfsvers=3
+        device: ":${PATH_LOCAL}"
