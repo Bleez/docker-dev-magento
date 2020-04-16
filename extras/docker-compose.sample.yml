@@ -1,14 +1,14 @@
 version: '3'
-services:
 
-  app:
+services:
+  <projeto>-php:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./image
+      dockerfile: php-dockerfile
     
     # user: ${USERID}
     
-    container_name: pacotes-bleez-app
+    container_name: <projeto>-php
     
     restart: unless-stopped
     
@@ -23,23 +23,24 @@ services:
     working_dir: /var/www/
     
     volumes:
-    - app-sync:/var/www/:delegated
+    - <projeto>-volume:/var/www/:delegated
     - ./config/php.ini:/usr/local/etc/php/php.ini
     # # - ./config/custom-xdebug.ini:/usr/local/etc/php/conf.d/custom-xdebug.ini
-    - ./bin/install-magento2:/usr/local/bin/install-magento2
-    - ./bin/redis-flush:/usr/local/bin/redis-flush
-    - ./bin/setup-cron:/usr/local/bin/setup-cron
-    - ./bin/xdebug:/usr/local/bin/xdebug
+    - ./image/bin/install-magento2:/usr/local/bin/get-magento2
+    - ./image/bin/install-magento2:/usr/local/bin/install-magento2
+    - ./image/bin/redis-flush:/usr/local/bin/redis-flush
+    - ./image/bin/setup-cron:/usr/local/bin/setup-cron
+    - ./image/bin/xdebug:/usr/local/bin/xdebug
     # - ./users/env.sample.php:/var/www/app/etc/env.sample.php
     
     networks:
-    - app-network
+    - <projeto>-network
 
   #Nginx Service
-  webserver:
+  <projeto>-nginx:
     image: nginx:alpine
     
-    container_name: pacotes-bleez-nginx
+    container_name: <projeto>-nginx
     
     restart: unless-stopped
     
@@ -53,16 +54,13 @@ services:
     
     volumes:
     # - ./nginx/logs:/var/log/nginx
-    - app-sync:/var/www/:delegated
+    - <projeto>-volume:/var/www/:delegated
     - ./config/magento.conf:/etc/nginx/conf.d/default.conf
     
     networks:
-    - app-network
-  
-    links:
-    - "app"
+    - <projeto>-network
 
-  db:
+  <projeto>-db:
     image: mariadb
     # image: mysql:5.7.22
 
@@ -71,7 +69,7 @@ services:
     
     restart: unless-stopped
     
-    container_name: pacotes-bleez-db
+    container_name: <projeto>-db
       
     tty: true
 
@@ -82,13 +80,13 @@ services:
     - MYSQL_PASSWORD=magento
   
     volumes:
-    - dbdata:/var/lib/mysql
+    - <projeto>-dbdata:/var/lib/mysql
     # - ./mysql/my.cnf:/etc/mysql/my.cnf
   
     networks:
-    - app-network
+    - <projeto>-network
 
-  phpmyadmin:
+  <projeto>-phpmyadmin:
     image: phpmyadmin/phpmyadmin
     
     environment:
@@ -101,31 +99,31 @@ services:
     - 8080:80
   
     networks:
-    - app-network
+    - <projeto>-network
 
-  redis:
+  <projeto>-redis:
     image: redis
 
-    container_name: pacotes-bleez-redis
+    container_name: <projeto>-redis
     
     ports:
     - 6379
     
     networks:
-    - app-network
+    - <projeto>-network
 
-  redis-session:
+  <projeto>-redis-session:
     image: redis
 
-    container_name: pacotes-bleez-redis-session
+    container_name: <projeto>-redis-session
     
     ports:
     - 6379
     
     networks:
-    - app-network
+    - <projeto>-network
 
-  mailhog:
+  <projeto>-mailhog:
     image: mailhog/mailhog
     
     ports:
@@ -133,19 +131,19 @@ services:
     - 8025:8025
     
     networks:
-    - app-network
+    - <projeto>-network
 
 #Docker Networks
 networks:
-  app-network:
+  <projeto>-network:
     driver: bridge
 
 volumes:
   
-  dbdata:
+  <projeto>-dbdata:
     driver: local
   
-  app-sync:
+  <projeto>-volume:
     driver_opts:
         type: "nfs"
         o: addr=${REMOTE_HOST},rw,nolock,hard,nointr,nfsvers=3

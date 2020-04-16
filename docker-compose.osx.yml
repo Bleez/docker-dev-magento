@@ -1,7 +1,0 @@
-version: '3'
-volumes:
-    app-sync:
-        driver_opts:
-            type: "nfs"
-            o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
-            device: ":${PATH_LOCAL}"

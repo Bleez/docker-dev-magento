@@ -1,0 +1,5 @@
+/src
+.DS_Store
+/.idea
+/.env
+/docker-compose.yml
