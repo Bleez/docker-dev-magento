@@ -71,13 +71,11 @@ echo -e "${GREEN}Compilando arquivos estáticos...${NC}"
 # Temq que ter en_US pra não dar pau no admin :(
 php -f ./bin/magento setup:static-content:deploy en_US pt_BR
 
-# echo -e "${GREEN}Re-indexando...${NC}"
-# php -f ./bin/magento indexer:reindex
+echo -e "${GREEN}Re-indexando...${NC}"
+php -f ./bin/magento indexer:reindex
 
 echo -e "${GREEN}Limpando cache e sessão...${NC}"
-# php -f ./bin/magento cache:flush
-rm -rf /var/www/var/cache
-rm -rf /var/www/var/session
+php -f ./bin/magento cache:flush
 
 # echo -e "${GREEN}Configurando Grunt...${NC}"
 # mv package.json.sample package.json ; mv Gruntfile.js.sample Gruntfile.js
