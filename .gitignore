@@ -4,3 +4,4 @@
 /.env
 /docker-compose.yml
 /shell
+/image/bin/install-magento2
