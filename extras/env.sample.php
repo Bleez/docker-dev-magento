@@ -10,7 +10,7 @@ return array(
         ),
     'session' =>
         array(
-            'save' => '<projeto>-redis',
+            'save' => 'redis',
             'redis' =>
                 array(
 

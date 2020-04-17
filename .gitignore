@@ -6,4 +6,4 @@
 /shell
 /image/bin/install-magento2
 /config/nginx.conf
-/image/extras/env.sample.php \
+/image/extras/env.sample.php
