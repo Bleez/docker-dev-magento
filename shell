@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker exec -it teste-$1 /bin/bash
