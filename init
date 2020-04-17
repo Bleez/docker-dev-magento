@@ -16,7 +16,7 @@ git config --global diff.renamelimit 5000
 
 sudo chmod u+x ./*
 
-rm .env docker-compose.yml
+rm .env docker-compose.yml shell
 
 cp extras/docker-compose.sample.yml docker-compose.yml
 cp extras/.env.sample .env
