@@ -57,7 +57,7 @@ return array(
                 ),
         ),
     'x-frame-options' => 'SAMEORIGIN',
-    'MAGE_MODE' => 'production',
+    'MAGE_MODE' => 'default',
     'cache_types' =>
         array(
             'config' => 1,
