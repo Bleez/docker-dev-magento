@@ -68,7 +68,8 @@ echo -e "${GREEN}Compilando arquivo de dependências...${NC}"
 php -f ./bin/magento setup:di:compile
 
 echo -e "${GREEN}Compilando arquivos estáticos...${NC}"
-php -f ./bin/magento setup:static-content:deploy pt_BR
+# Temq que ter en_US pra não dar pau no admin :(
+php -f ./bin/magento setup:static-content:deploy en_US pt_BR
 
 # echo -e "${GREEN}Re-indexando...${NC}"
 # php -f ./bin/magento indexer:reindex
