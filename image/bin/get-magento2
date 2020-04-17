@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-rm .gitkeep
-
 cd /var/www
+
+rm .gitkeep
 
 if [ $@ ]; then
   composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition:$1 . ;
