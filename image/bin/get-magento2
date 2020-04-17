@@ -9,3 +9,6 @@ if [ $@ ]; then
 else
   composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition . ;
 fi
+
+#recria para não deixar git com arquivos querendo commitar
+touch .gitkeep
