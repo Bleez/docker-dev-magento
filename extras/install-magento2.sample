@@ -64,24 +64,31 @@ cp ~/.composer/auth.json var/composer_home/auth.json
 echo -e "${GREEN}Rodando setup:upgrade...${NC}"
 php -f ./bin/magento setup:upgrade
 
+echo -e "${GREEN}Compilando arquivo de dependências...${NC}"
+php -f ./bin/magento setup:di:compile
+
+echo -e "${GREEN}Compilando arquivos estáticos...${NC}"
+php -f ./bin/magento setup:static-content:deploy pt_BR
+
 # echo -e "${GREEN}Re-indexando...${NC}"
 # php -f ./bin/magento indexer:reindex
 
-echo -e "${GREEN}Limpando cache...${NC}"
+echo -e "${GREEN}Limpando cache e sessão...${NC}"
 # php -f ./bin/magento cache:flush
 rm -rf /var/www/var/cache
+rm -rf /var/www/var/session
 
 # echo -e "${GREEN}Configurando Grunt...${NC}"
 # mv package.json.sample package.json ; mv Gruntfile.js.sample Gruntfile.js
 # npm i
 
-echo -e "${GREEN}Setando a loja para produção...${NC}"
-php -f ./bin/magento deploy:mode:set production
+# echo -e "${GREEN}Setando a loja para produção...${NC}"
+# php -f ./bin/magento deploy:mode:set production
 
-echo -e "${GREEN}Refazendo autoload...${NC}"
-composer dump-autoload -o
+# echo -e "${GREEN}Refazendo autoload...${NC}"
+# composer dump-autoload -o
 
-clear
+# clear
 
 echo "
 ===================== 🚀 Done 🚀 ===================
