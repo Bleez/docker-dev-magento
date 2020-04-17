@@ -20,12 +20,14 @@ rm -f .env docker-compose.yml \
       shell \
       image/bin/install-magento2 \
       config/nginx.conf \
+      image/bin/redis-flush \
       image/extras/env.sample.php \
 
 cp extras/docker-compose.sample.yml docker-compose.yml
 cp extras/.env.sample .env
 cp extras/shell.sample shell
 cp extras/install-magento2.sample image/bin/install-magento2
+cp extras/redis-flush.sample image/bin/redis-flush
 cp extras/nginx.sample.conf config/nginx.conf
 cp extras/env.sample.php image/extras/env.sample.php
 
@@ -33,6 +35,7 @@ sed -i '' -e "s/<projeto>/$1/g" \
           docker-compose.yml \
           shell \
           image/bin/install-magento2 \
+          image/bin/redis-flush \
           image/extras/env.sample.php \
           config/nginx.conf;
 
