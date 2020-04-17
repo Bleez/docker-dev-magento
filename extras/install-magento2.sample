@@ -44,17 +44,16 @@ php -f ./bin/magento setup:install --base-url=http://localhost/ \
     --currency=BRL \
     --timezone=America/Fortaleza \
     --use-rewrites=1 \
-    --use-sample-data \
     --backend-frontname=admin \
     # --use-sample-data \
 
 echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
 mv ./app/etc/env.php ./app/etc/env.original.php;
-cp -rv /var/users/env.sample.php ./app/etc/env.php;
+cp -rv /var/extras/env.sample.php ./app/etc/env.php;
 
-echo -e "${GREEN}Instalando cron jobs...${NC}"
-n98 cron:install;
-php -f ./bin/magento indexer:set-mode schedule;
+# echo -e "${GREEN}Instalando cron jobs...${NC}"
+# n98 cron:install;
+# php -f ./bin/magento indexer:set-mode schedule;
 
 echo -e "${GREEN}Configurando chaves de autenticação...${NC}"
 cp ~/.composer/auth.json var/composer_home/auth.json
@@ -65,11 +64,12 @@ cp ~/.composer/auth.json var/composer_home/auth.json
 echo -e "${GREEN}Rodando setup:upgrade...${NC}"
 php -f ./bin/magento setup:upgrade
 
-echo -e "${GREEN}Re-indexando...${NC}"
-php -f ./bin/magento indexer:reindex
+# echo -e "${GREEN}Re-indexando...${NC}"
+# php -f ./bin/magento indexer:reindex
 
 echo -e "${GREEN}Limpando cache...${NC}"
-php -f ./bin/magento cache:flush
+# php -f ./bin/magento cache:flush
+rm -rf /var/www/var/cache
 
 # echo -e "${GREEN}Configurando Grunt...${NC}"
 # mv package.json.sample package.json ; mv Gruntfile.js.sample Gruntfile.js
