@@ -10,11 +10,11 @@ return array(
         ),
     'session' =>
         array(
-            'save' => 'redis',
+            'save' => '<projeto>-redis',
             'redis' =>
                 array(
 
-                    'host' => 'redis-session',
+                    'host' => '<projeto>-redis-session',
                     'port' => '6379',
                     'password' => '',
                     'timeout' => '2.5',
@@ -41,7 +41,7 @@ return array(
                 array(
                     'default' =>
                         array(
-                            'host' => 'db',
+                            'host' => '<projeto>-db',
                             'dbname' => 'magento',
                             'username' => 'magento',
                             'password' => 'magento',
@@ -88,7 +88,7 @@ return array(
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
                                 array(
-                                    'server' => 'redis',
+                                    'server' => '<projeto>-redis',
                                     'port' => '6379',
                                     'persistent' => '',
                                     'database' => '0',
@@ -109,7 +109,7 @@ return array(
                             'backend' => 'Cm_Cache_Backend_Redis',
                             'backend_options' =>
                                 array(
-                                    'server' => 'redis',
+                                    'server' => '<projeto>-redis',
                                     'port' => '6379',
                                     'persistent' => '',
                                     'database' => '1',
