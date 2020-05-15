@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git clone git@github.com:Bleez/magento-dev-pacotes.git src
+
 NOME_PASTA=${PWD##*/}
 
 sudo chmod u+x ./*
