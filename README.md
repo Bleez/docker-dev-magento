@@ -116,6 +116,15 @@ Exemplo
 $ ./stop
 ```
 
+### ./kill
+
+Desliga e destrói todos os containers, volumes, networks e imagens usadas. Os arquivos do ambiente e do magento dentro de `/src` **não são excluídos**. Deve ser executado na raiz do ambiente.
+
+Exemplo
+```bash
+$ ./kill
+```
+
 ### ./logs
 
 Mostra na tela o logs de execução de todos os containers. Ideal para entender se algum container teve problema para iniciar. Deve ser executado na raiz do ambiente.
