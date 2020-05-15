@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+NOME_PASTA=${PWD##*/}
+
 sudo chmod u+x ./*
 
 rm -f .env docker-compose.yml \
@@ -17,7 +19,7 @@ cp extras/redis-flush.sample image/bin/redis-flush
 cp extras/nginx.sample.conf config/nginx.conf
 cp extras/env.sample.php image/extras/env.sample.php
 
-sed -i '' -e "s/<projeto>/$1/g" \
+sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
           docker-compose.yml \
           shell \
           image/bin/install-magento2 \
