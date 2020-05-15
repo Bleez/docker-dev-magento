@@ -3,12 +3,11 @@ docker-compose up -d
 echo "
 ===================== 🚀 Done 🚀 ===================
 
-      Created by Rafael Corrêa Gomes
-      v.$version
+      Created by Bruno Viana 😎
       Access your new links:
 
-      🌎 Web server: http://localhost/
-      ⚙️ PHPMyAdmin: http://localhost:8080
-      ✉️ Local emails: http://localhost:8025
+      🌎 Web server: http://127.0.0.1/
+      ⚙️ PHPMyAdmin: http://127.0.0.1:8080
+      ✉️ Local emails: http://127.0.0.1:8025
 
 ===================== 🚀 Done 🚀 ==================="
