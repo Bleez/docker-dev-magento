@@ -1,7 +1,11 @@
 
 ## Para criar a imagem:
-## $ docker build . -f php-dockerfile -t brunoviana/magento-php-7.2:1.0.x
+## $ docker build . -f php-dockerfile -t brunoviana/magento-php-7.2:latest
+## $ docker tag brunoviana/magento-php-7.2:latest brunoviana/magento-php-7.2:1.0.x
+## $ docker push brunoviana/magento-php-7.2:latest
 ## $ docker push brunoviana/magento-php-7.2:1.0.x
+##
+## Ver esse link https://medium.com/better-programming/how-to-version-your-docker-images-1d5c577ebf54
 
 FROM php:7.2-fpm
 
