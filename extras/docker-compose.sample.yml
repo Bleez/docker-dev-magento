@@ -86,6 +86,8 @@ services:
 
   <projeto>-phpmyadmin:
     image: phpmyadmin/phpmyadmin
+
+    container_name: <projeto>-phpmyadmin
     
     environment:
     - PMA_HOST=db
