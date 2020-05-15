@@ -7,7 +7,7 @@ Para esse SDK funcionar é necessário que você tenha o [Docker](https://docs.d
 
 Uma vez que o repositório foi clonado e instalado você terá um ambiente com:
 
-* PHP 7.1
+* PHP 7.2
 * Nginx
 * Maria DB
 * Redis
