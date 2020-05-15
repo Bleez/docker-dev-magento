@@ -2,9 +2,7 @@ version: '3'
 
 services:
   <projeto>-php:
-    build:
-      context: ./image
-      dockerfile: php-dockerfile
+    image: brunoviana/magento-php-7.1
     
     # user: ${USERID}
     
