@@ -95,6 +95,8 @@ Uma vez instalado a loja estará disponível no endereço `http://127.0.0.1/`. P
 * **Login:** admin
 * **Senha:** admin1234
 
+> :warning: Não instale o Magento através do navegador. Use o instalador do ambiente.
+
 ## Entrando nos containers
 
 Pode acontecer casos que você precise entrar dentro de um dos containers. Caso você tenha essa necessidade você pode fazer isso usando o comando `./shell <servico>`.
