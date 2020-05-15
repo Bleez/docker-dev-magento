@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "" ]; then
+  echo -e "ERRO: Informe o nome do projeto"
+  exit
+fi
+
+if [ "$2" == "clone" ]; then
+  git clone https://github.com/brunoviana/magento2-docker.git $1 && cd $1;
+fi
+
+git config --global core.autocrlf false
+git config --global core.eol LF
+git config --global core.fileMode false
+git config --global diff.renamelimit 5000
+
+sudo chmod u+x ./*
+
+rm -f .env docker-compose.yml \
+      shell \
+      image/bin/install-magento2 \
+      config/nginx.conf \
+      image/bin/redis-flush \
+      image/extras/env.sample.php \
+
+cp extras/docker-compose.sample.yml docker-compose.yml
+cp extras/.env.sample .env
+cp extras/shell.sample shell
+cp extras/install-magento2.sample image/bin/install-magento2
+cp extras/redis-flush.sample image/bin/redis-flush
+cp extras/nginx.sample.conf config/nginx.conf
+cp extras/env.sample.php image/extras/env.sample.php
+
+sed -i '' -e "s/<projeto>/$1/g" \
+          docker-compose.yml \
+          shell \
+          image/bin/install-magento2 \
+          image/bin/redis-flush \
+          image/extras/env.sample.php \
+          config/nginx.conf;
+
+sed -i '' -e  "s#<path-local>#$PWD#g" .env;
+
+if [ "$(uname)" == "Darwin" ]; then
+  sed -i '' -e "s/\${REMOTE_HOST}/host.docker.internal/g" docker-compose.yml;
+fi
+
+echo "Concluído. Para iniciar execute ./start"
