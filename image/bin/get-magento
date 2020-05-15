@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd /var/www
+
+rm .gitkeep
+
+git clone git@github.com:Bleez/magento-dev-pacotes.git src
+
+#recria para não deixar git com arquivos querendo commitar
+touch .gitkeep
