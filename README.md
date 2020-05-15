@@ -33,6 +33,24 @@ Em seguida instale o ambiente rodando:
 $ ./install
 ```
 
+##### :warning: :apple: Configurações para OSX
+
+O docker tem problemas ao ler arquivos no Mac e isso causa lentidão. Para contornar esse problema a gente utiliza NFS nos volumes, porém para que o Mac consiga ler arquivos usando esse modo é necessário rodar o arquivo `nfs.sh`.
+
+Ainda dentro da pasta `/dev` rode os comandos:
+
+```bash
+$ sudo chmod +x nfs.sh
+
+$ ./nfs.sh
+```
+
+Informe `y` sempre que perguntar e aguarde concluir os ajustes.
+
+**Não continue antes de executar esse passo ou não vai funcionar**
+
+### Iniciando containers
+
 Depois que esse processo terminar você precisa iniciar os containers para começar a usar o ambiente com o comando `./start`.
 
 Exemplo:
@@ -98,56 +116,82 @@ Estes são os serviços disponíveis nesse comando:
 
 Abaixo a lista de todos os comandos disponíveis no ambiente.
 
-### ./start
+### Comandos para gerenciar ambiente
 
-Inicia os containers que farão o ambiente funcionar. Deve ser executado na raiz do ambiente.
+Os comandos abaixo devem ser executados na rais do ambiente
+
+#### ./start
+
+Inicia os containers que farão o ambiente funcionar.
 
 Exemplo
 ```bash
 $ ./start
 ```
 
-### ./stop
+#### ./stop
 
-Desliga os containers sem destruí-los. Deve ser executado na raiz do ambiente.
+Desliga os containers sem destruí-los.
 
 Exemplo
 ```bash
 $ ./stop
 ```
 
-### ./kill
+#### ./kill
 
-Desliga e destrói todos os containers, volumes, networks e imagens usadas. Os arquivos do ambiente e do magento dentro de `/src` **não são excluídos**. Deve ser executado na raiz do ambiente.
+Desliga e destrói todos os containers, volumes, networks e imagens usadas. Os arquivos do ambiente e do magento dentro de `/src` **não são excluídos**.
 
 Exemplo
 ```bash
 $ ./kill
 ```
 
-### ./logs
+#### ./logs
 
-Mostra na tela o logs de execução de todos os containers. Ideal para entender se algum container teve problema para iniciar. Deve ser executado na raiz do ambiente.
+Mostra na tela o logs de execução de todos os containers. Ideal para entender se algum container teve problema para iniciar.
 
 Exemplo
 ```bash
 $ ./logs
 ```
 
-### ./shell
+#### ./shell
 
-Entra dentro do container de um determinado serviço. Deve ser executado na raiz do ambiente.
+Entra dentro do container de um determinado serviço.
 
 Exemplo
 ```bash
 $ ./shell php
 ```
 
-### git pull
+#### git pull
 
-Atualiza ambiente com as últimas modificações. Deve ser executado na raiz do ambiente.
+Atualiza ambiente com as últimas modificações.
 
 Exemplo
 ```bash
 $ git pull
+```
+
+### Comandos para trabalhar com Magento
+
+Os comando abaixo devem ser executados dentro do container `php` através do comando `./shell php`.
+
+#### install-magento2
+
+Executa instalação do Magento que está instalado na dentro de `/src`.
+
+Exemplo
+```bash
+$ install-magento2
+```
+
+#### redis-flush
+
+Limpa todo o Redis, tanto o cache de arquivos como a sessão.
+
+Exemplo
+```bash
+$ redis-flush
 ```
