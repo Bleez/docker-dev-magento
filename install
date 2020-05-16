@@ -6,7 +6,7 @@ fi
 
 NOME_PASTA=${PWD##*/}
 
-sudo chmod u+x ./*
+sudo chmod u+x install kill logs shell start stop update
 
 rm -f .env docker-compose.yml \
       shell \
