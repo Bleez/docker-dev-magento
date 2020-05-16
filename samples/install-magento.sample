@@ -77,12 +77,15 @@ php -f ./bin/magento indexer:reindex
 echo -e "${GREEN}Limpando cache e sessão...${NC}"
 php -f ./bin/magento cache:flush
 
+echo -e "${GREEN}Criando diretório de pacotes...${NC}"
+mkdir packages
+
 # echo -e "${GREEN}Configurando Grunt...${NC}"
 # mv package.json.sample package.json ; mv Gruntfile.js.sample Gruntfile.js
 # npm i
 
-# echo -e "${GREEN}Setando a loja para produção...${NC}"
-# php -f ./bin/magento deploy:mode:set production
+echo -e "${GREEN}Setando a loja para desenvolvimento...${NC}"
+php -f ./bin/magento deploy:mode:set developer
 
 # echo -e "${GREEN}Refazendo autoload...${NC}"
 # composer dump-autoload -o
