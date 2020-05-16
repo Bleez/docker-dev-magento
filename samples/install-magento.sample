@@ -28,37 +28,42 @@ chmod u+w -R ./app/etc
 echo -e "${YELLOW}- chmod u+x ./bin/magento${NC}"
 chmod u+x ./bin/magento
 
-echo -e "${GREEN}Instalando Magento...${NC}"
+if [ ! -f "/var/www/app/etc/env.php" ]; then
 
-php -f ./bin/magento setup:install --base-url=http://localhost/ \
-    --db-host=<projeto>-db \
-    --db-name=magento \
-    --db-user=magento \
-    --db-password=magento \
-    --admin-firstname=Magento \
-    --admin-lastname=Commerce \
-    --admin-email=user@example.com \
-    --admin-user=admin \
-    --admin-password=admin1234 \
-    --language=pt_BR \
-    --currency=BRL \
-    --timezone=America/Fortaleza \
-    --use-rewrites=1 \
-    --backend-frontname=admin
-    # --use-sample-data \
+    echo -e "${GREEN}Instalando Magento...${NC}"
 
-if [ ! -f "./app/etc/env.original.php" ]; then
+    php -f ./bin/magento setup:install --base-url=http://127.0.0.1/ \
+        --db-host=<projeto>-db \
+        --db-name=magento \
+        --db-user=magento \
+        --db-password=magento \
+        --admin-firstname=Magento \
+        --admin-lastname=Commerce \
+        --admin-email=user@example.com \
+        --admin-user=admin \
+        --admin-password=admin1234 \
+        --language=en_US \
+        --currency=BRL \
+        --timezone=America/Fortaleza \
+        --use-rewrites=1 \
+        --backend-frontname=admin
+        # --use-sample-data \
+fi
+
+if [ ! -f "/var/www/app/etc/env.original.php" ]; then
     echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
-    mv ./app/etc/env.php ./app/etc/env.original.php;
-    cp -rv /var/extras/env.sample.php ./app/etc/env.php;
+    mv /var/www/app/etc/env.php /var/www/app/etc/env.original.php;
+    cp -rv /var/extras/env.sample.php /var/www/app/etc/env.php;
 fi
 
 # echo -e "${GREEN}Instalando cron jobs...${NC}"
 # n98 cron:install;
 # php -f ./bin/magento indexer:set-mode schedule;
 
-echo -e "${GREEN}Configurando chaves de autenticação...${NC}"
-cp ~/.composer/auth.json var/composer_home/auth.json
+if [ ! -f "/var/www/var/composer_home/auth.json" ]; then
+    echo -e "${GREEN}Configurando chaves de autenticação...${NC}"
+    cp ~/.composer/auth.json /var/www/var/composer_home/auth.json
+fi
 
 # echo -e "${GREEN}Instalando Sample Data...${NC}"
 # php -f ./bin/magento sampledata:deploy
@@ -70,8 +75,7 @@ echo -e "${GREEN}Compilando arquivo de dependências...${NC}"
 php -f ./bin/magento setup:di:compile
 
 echo -e "${GREEN}Compilando arquivos estáticos...${NC}"
-# Temq que ter en_US pra não dar pau no admin :(
-php -f ./bin/magento setup:static-content:deploy en_US pt_BR
+php -f ./bin/magento setup:static-content:deploy en_US
 
 echo -e "${GREEN}Re-indexando...${NC}"
 php -f ./bin/magento indexer:reindex
