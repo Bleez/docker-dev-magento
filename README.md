@@ -58,7 +58,7 @@ Exemplo:
 $ ./start
 ```
 
-> Tenha certeza de que as portas 80, 8080 e 3306 estão livres. Caso contrario, os containers falharão ao iniciar.
+> Por padrão o ambiente usará as portas 80, 8080 e 3306. Se quiser mudar as portas que os containers usa edite arquivo `.env` localizado na raiz.
 
 Este comando instalará todas as imagens que o Docker precisa para fazer o ambiente funcionar e iniciará os mesmos.
 
