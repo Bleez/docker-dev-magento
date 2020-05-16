@@ -2,7 +2,7 @@ version: '3'
 
 services:
   <projeto>-php:
-    image: brunoviana/magento-php-7.2:1.0.1
+    image: brunoviana/magento-php-7.2
     
     # user: ${USERID}
     
@@ -12,24 +12,12 @@ services:
     
     tty: true
     
-    # environment:
-      # SERVICE_NAME: app
-      # SERVICE_TAGS: dev
-      # XDEBUG_CONFIG: remotehost=${REMOTE_HOST}
-      # PHP_IDE_CONFIG: serverName=${SERVER_NAME}
-    
     working_dir: /var/www/
     
     volumes:
     - <projeto>-volume:/var/www/:delegated
     - ./config/php.ini:/usr/local/etc/php/php.ini
-    # # - ./config/custom-xdebug.ini:/usr/local/etc/php/conf.d/custom-xdebug.ini
-    - ./image/bin/get-magento2:/usr/local/bin/get-magento2
-    - ./image/bin/install-magento2:/usr/local/bin/install-magento2
-    - ./image/bin/redis-flush:/usr/local/bin/redis-flush
-    - ./image/bin/setup-cron:/usr/local/bin/setup-cron
-    - ./image/bin/xdebug:/usr/local/bin/xdebug
-    # - ./users/env.sample.php:/var/www/app/etc/env.sample.php
+    - ./image/bin/install-magento:/usr/local/bin/install-magento
     
     networks:
     - <projeto>-network
