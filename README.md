@@ -58,6 +58,8 @@ Exemplo:
 $ ./start
 ```
 
+> Tenha certeza de que as portas 80, 8080 e 3306 estão livres. Caso contrario, os containers falharão ao iniciar.
+
 Este comando instalará todas as imagens que o Docker precisa para fazer o ambiente funcionar e iniciará os mesmos.
 
 > O Comando `./install` também irá clonar o [Magento Bleez](https://github.com/Bleez/magento-dev-pacotes) próprio para desenvolvimento de pacotes. Ele contém comandos especiais para ajudar no desenvolvimento e testes dos pacotes. Consulte a página do repositório para saber mais.
@@ -82,6 +84,8 @@ Uma vez dentro do container rode o comando `composer install` para instalar as d
 ```bash
 $ composer install
 ```
+
+Nesse momento o composer pedirá para você informar suas chaves de autenticação. Você pode conseguí-las seguinto [estas instruções](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html)
 
 Depois execute `install-magento2` para fazer a instalação do Magento.
 
