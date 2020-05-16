@@ -47,9 +47,11 @@ php -f ./bin/magento setup:install --base-url=http://localhost/ \
     --backend-frontname=admin
     # --use-sample-data \
 
-echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
-mv ./app/etc/env.php ./app/etc/env.original.php;
-cp -rv /var/extras/env.sample.php ./app/etc/env.php;
+if [ ! -f "./app/etc/env.original.php" ]; then
+    echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
+    mv ./app/etc/env.php ./app/etc/env.original.php;
+    cp -rv /var/extras/env.sample.php ./app/etc/env.php;
+fi
 
 # echo -e "${GREEN}Instalando cron jobs...${NC}"
 # n98 cron:install;
