@@ -171,7 +171,7 @@ Exemplo
 $ ./shell php
 ```
 
-#### git pull
+#### ./update
 
 Atualiza ambiente com as últimas modificações.
 
