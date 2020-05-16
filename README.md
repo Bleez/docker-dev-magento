@@ -177,7 +177,7 @@ Atualiza ambiente com as últimas modificações.
 
 Exemplo
 ```bash
-$ git pull
+$ ./update
 ```
 
 ### Comandos para trabalhar com Magento
