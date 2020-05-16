@@ -79,8 +79,8 @@ services:
     
     environment:
     - PMA_HOST=db
-    - PMA_USER=root
-    - PMA_PASSWORD=root
+    - PMA_USER=magento
+    - PMA_PASSWORD=magento
     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     
     ports:
