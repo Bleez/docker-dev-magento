@@ -78,9 +78,7 @@ services:
     container_name: <projeto>-phpmyadmin
     
     environment:
-    - PMA_HOST=db
-    - PMA_USER=magento
-    - PMA_PASSWORD=magento
+    - PMA_HOST=<projeto>-db
     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     
     ports:
