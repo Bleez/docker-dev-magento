@@ -6,8 +6,6 @@ fi
 
 NOME_PASTA=${PWD##*/}
 
-sudo chmod u+x install kill logs shell start stop update
-
 rm -f .env docker-compose.yml \
       shell \
       image/bin/install-magento \
@@ -16,12 +14,12 @@ rm -f .env docker-compose.yml \
       image/extras/env.sample.php \
 
 cp samples/docker-compose.sample.yml docker-compose.yml
-cp samples/.env.sample .env
 cp samples/shell.sample shell
 cp samples/install-magento.sample image/bin/install-magento
 cp samples/redis-flush.sample image/bin/redis-flush
 cp samples/nginx.sample.conf config/nginx.conf
 cp samples/env.sample.php image/extras/env.sample.php
+cp samples/.env.sample .env
 
 sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
           docker-compose.yml \
@@ -36,5 +34,7 @@ sed -i '' -e  "s#<path-local>#$PWD#g" .env;
 if [ "$(uname)" == "Darwin" ]; then
   sed -i '' -e "s/\${REMOTE_HOST}/host.docker.internal/g" docker-compose.yml;
 fi
+
+sudo chmod u+x install kill logs shell start stop update
 
 echo "Concluído. Para iniciar execute ./start"
