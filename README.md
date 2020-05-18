@@ -33,13 +33,19 @@ Em seguida instale o ambiente rodando:
 $ ./install
 ```
 
-##### :warning: :apple: Configurações para OSX
+### Habilitando o NFS
 
-O docker tem problemas ao ler arquivos no Mac e isso causa lentidão. Para contornar esse problema a gente utiliza NFS nos volumes, porém para que o Mac consiga ler arquivos usando esse modo é necessário rodar o arquivo `nfs.sh`.
+O Docker pode apresentar lentidões, principalmente no Mac. Isso acontece por conta da forma como o container sincroniza arquivos com host. Para aliviar essa lentidão a gente utiliza NFS nos volumes.
 
-Ainda dentro da pasta `/dev` rode os comandos:
+**:warning: Esse passo é importantíssimo, não pule ele ou nada irá funcionar.**
+
+##### Configurações para OSX :apple:
+
+No Mac você só precisa rodar o arquivo `nfs.sh` disponível na pasta `/image`.
 
 ```bash
+$ cd image
+
 $ sudo chmod +x nfs.sh
 
 $ ./nfs.sh
@@ -47,7 +53,7 @@ $ ./nfs.sh
 
 Informe `y` sempre que perguntar e aguarde concluir os ajustes.
 
-##### :warning: :apple: Configurações para Linux
+##### Configurações para Linux :penguin:
 
 No Linux tem um processo um pouco diferente para instalar o NFS. Siga os passos abaixo.
 
@@ -64,8 +70,6 @@ echo "$HOME/html *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/
 
 sudo exportfs -a && sudo systemctl restart nfs-kernel-server
 ```
-
-**Não continue antes de executar esse passo ou não vai funcionar**
 
 ### Iniciando containers
 
