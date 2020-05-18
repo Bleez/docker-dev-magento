@@ -206,13 +206,13 @@ $ ./update
 
 Os comando abaixo devem ser executados dentro do container `php` através do comando `./shell php`.
 
-#### install-magento2
+#### install-magento
 
 Executa instalação do Magento que está instalado na dentro de `/src`.
 
 Exemplo
 ```bash
-$ install-magento2
+$ install-magento
 ```
 
 #### redis-flush
