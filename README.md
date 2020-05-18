@@ -47,6 +47,24 @@ $ ./nfs.sh
 
 Informe `y` sempre que perguntar e aguarde concluir os ajustes.
 
+##### :warning: :apple: Configurações para Linux
+
+No Linux tem um processo um pouco diferente para instalar o NFS. Siga os passos abaixo.
+
+```bash
+sudo apt install nfs-kernel-server -y 
+
+sudo groupadd docker && sudo usermod -aG docker $USER 
+```
+
+O comando abaixo compartilha a pasta `html` na pasta do seu usuário para ser usado pelos volumes do Docker. Se sua pasta for outra você deve mudar nesse comando.
+
+```bash
+echo "$HOME/html *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
+
+sudo exportfs -a && sudo systemctl restart nfs-kernel-server
+```
+
 **Não continue antes de executar esse passo ou não vai funcionar**
 
 ### Iniciando containers
