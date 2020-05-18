@@ -109,10 +109,10 @@ $ composer install
 
 Nesse momento o composer pedirá para você informar suas chaves de autenticação. Você pode conseguí-las seguinto [estas instruções](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html)
 
-Depois execute `install-magento2` para fazer a instalação do Magento.
+Depois execute `install-magento` para fazer a instalação do Magento.
 
 ```bash
-$ install-magento2
+$ install-magento
 ```
 
 Uma vez instalado a loja estará disponível no endereço `http://127.0.0.1/`. Para acessar a administração use as credenciais:
@@ -223,3 +223,58 @@ Exemplo
 ```bash
 $ redis-flush
 ```
+
+#### m2_upgrade
+
+Limpa a pasta `/var` e roda o `setup:upgrade`
+
+Exemplo
+```bash
+$ m2_upgrade
+```
+
+#### m2_clear
+
+Limpa a pasta `/var` e apaga todos os arquivos compilados pelo Magento (`/generated` e `/pub/static`).
+
+Exemplo
+```bash
+$ m2_clear
+```
+
+#### m2_deploy
+
+Limpa tudo rodando `m2_clear` e em seguida roda `setup:static-content:deploy pt_BR -f`.
+
+Exemplo
+```bash
+$ m2_deploy
+```
+
+#### m2_reindex
+
+Reindexa a loja inteira
+
+Exemplo
+```bash
+$ m2_reindex
+```
+
+#### m2_collect_phrases
+
+Executa `i18n:collect-phrases` dentro da pasta do tema do cliente (`/app/project/tema-do-cliente`) especificado por parâmetro.
+
+Exemplo
+```bash
+$ m2_collect_phrases tema-do-cliente
+```
+
+#### disable_fucking_modules
+
+Desabilita modulos que não são necessários para desenvolvimento. Isso pode deixar o processamente e a velocidade do Magento mais leve.
+
+Exemplo
+```bash
+$ disable_fucking_modules
+```
+
