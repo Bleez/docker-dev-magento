@@ -226,6 +226,15 @@ Exemplo
 $ redis-flush
 ```
 
+#### xdebug
+
+Habilita ou desabilita o uso do Xdebug ao rodar o PHP via linha de comando.
+
+Exemplo
+```bash
+$ xdebug
+```
+
 #### m2_upgrade
 
 Limpa a pasta `/var` e roda o `setup:upgrade`
