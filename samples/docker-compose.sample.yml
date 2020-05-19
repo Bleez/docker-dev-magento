@@ -18,6 +18,7 @@ services:
     - <projeto>-volume:/var/www/:delegated
     - ./config/php.ini:/usr/local/etc/php/php.ini
     - ./image/bin/install-magento:/usr/local/bin/install-magento
+    - ./image/bin/xdebug:/usr/local/bin/xdebug
     - ./image/extras/env.sample.php:/var/extras/env.sample.php
     
     networks:
