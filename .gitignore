@@ -9,3 +9,4 @@
 /config/nginx.conf
 /image/extras/env.sample.php
 /image/bin/install-magento
+/docker-compose.custom.yml

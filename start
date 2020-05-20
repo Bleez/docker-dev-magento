@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.custom.yml  up -d
 echo "
 ===================== 🚀 Done 🚀 ===================
 

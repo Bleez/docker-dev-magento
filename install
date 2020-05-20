@@ -21,6 +21,10 @@ cp samples/nginx.sample.conf config/nginx.conf
 cp samples/env.sample.php image/extras/env.sample.php
 cp samples/.env.sample .env
 
+if [ ! -f "docker-compose.custom.yml" ]; then
+  cp samples/docker-compose.custom.sample.yml docker-compose.custom.yml
+fi
+
 sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
           docker-compose.yml \
           shell \
