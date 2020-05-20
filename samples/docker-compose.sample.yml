@@ -17,7 +17,9 @@ services:
     volumes:
     - <projeto>-volume:/var/www/:delegated
     - ./config/php.ini:/usr/local/etc/php/php.ini
+    - ./config/opcache.ini:/usr/local/etc/php/conf.d/conf-opcache.ini
     - ./image/bin/install-magento:/usr/local/bin/install-magento
+    - ./image/bin/redis-flush:/usr/local/bin/redis-flush
     - ./image/bin/xdebug:/usr/local/bin/xdebug
     - ./image/extras/env.sample.php:/var/extras/env.sample.php
     
