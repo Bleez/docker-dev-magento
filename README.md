@@ -201,6 +201,8 @@ $ ./shell php
 
 Atualiza ambiente com as últimas modificações.
 
+> Este comando não exclui o conteúdo da pasta /src mas refaz todos os containers, portanto tudo que tiver no banco de dados será perdido e o Magento deve ser instalado novamente.
+
 Exemplo
 ```bash
 $ ./update
