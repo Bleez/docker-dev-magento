@@ -117,7 +117,7 @@ Depois execute `install-magento` para fazer a instalação do Magento.
 $ install-magento
 ```
 
-> Dica: Se você precisar reinstalar o Magento do zero basta você apagar todas as tabelas do banco de dados e executar novamente `install-magento`
+> Dica: Se você precisar reinstalar o Magento do zero basta executar novamente `install-magento` que uma nova instalação limpa será feita
 
 Uma vez instalado a loja estará disponível no endereço `http://127.0.0.1/`. Para acessar a administração use as credenciais:
 
