@@ -28,33 +28,36 @@ chmod u+w -R ./app/etc
 echo -e "${YELLOW}- chmod u+x ./bin/magento${NC}"
 chmod u+x ./bin/magento
 
-if [ ! -f "/var/www/app/etc/env.php" ]; then
+echo -e "${GREEN}Instalando Magento...${NC}"
 
-    echo -e "${GREEN}Instalando Magento...${NC}"
-
-    php -f ./bin/magento setup:install --base-url=http://127.0.0.1/ \
-        --db-host=<projeto>-db \
-        --db-name=magento \
-        --db-user=magento \
-        --db-password=magento \
-        --admin-firstname=Magento \
-        --admin-lastname=Commerce \
-        --admin-email=user@example.com \
-        --admin-user=admin \
-        --admin-password=admin1234 \
-        --language=en_US \
-        --currency=BRL \
-        --timezone=America/Fortaleza \
-        --use-rewrites=1 \
-        --backend-frontname=admin
-        # --use-sample-data \
+if [ -f "/var/www/app/etc/env.original.php" ]; then
+    rm /var/www/app/etc/env.original.php;
 fi
 
-if [ ! -f "/var/www/app/etc/env.original.php" ]; then
-    echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
-    mv /var/www/app/etc/env.php /var/www/app/etc/env.original.php;
-    cp -rv /var/extras/env.sample.php /var/www/app/etc/env.php;
+if [ -f "/var/www/app/etc/env.php" ]; then
+    rm /var/www/app/etc/env.php;
 fi
+
+php -f ./bin/magento setup:install --base-url=http://127.0.0.1/ \
+    --db-host=<projeto>-db \
+    --db-name=magento \
+    --db-user=magento \
+    --db-password=magento \
+    --admin-firstname=Magento \
+    --admin-lastname=Commerce \
+    --admin-email=user@example.com \
+    --admin-user=admin \
+    --admin-password=admin1234 \
+    --language=en_US \
+    --currency=BRL \
+    --timezone=America/Fortaleza \
+    --use-rewrites=1 \
+    --backend-frontname=admin
+    # --use-sample-data \
+
+echo -e "${GREEN}Configurando para usar Redis em cache e sessão...${NC}"
+mv /var/www/app/etc/env.php /var/www/app/etc/env.original.php;
+cp -rv /var/extras/env.sample.php /var/www/app/etc/env.php;
 
 # echo -e "${GREEN}Instalando cron jobs...${NC}"
 # n98 cron:install;
