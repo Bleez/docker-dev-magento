@@ -216,6 +216,8 @@ Os comando abaixo devem ser executados dentro do container `php` através do com
 
 Executa instalação do Magento que está instalado na dentro de `/src`.
 
+> Se você executar este comando com um Magento já instalado tudo será apagado e uma nova instalação será feita.
+
 Exemplo
 ```bash
 $ install-magento
