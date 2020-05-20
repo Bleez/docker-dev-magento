@@ -10,23 +10,30 @@ cd /var/www
 
 echo -e "${GREEN}Dando permissões de leitura e execução...${NC}"
 
-echo -e "${YELLOW}- chmod u+w -R ./var${NC}"
+echo -e "${YELLOW}$ chmod u+w -R ./var${NC}"
 chmod u+w -R ./var 
 
-echo -e "${YELLOW}- chmod u+w -R ./vendor${NC}"
+# echo -e "${YELLOW}$ chmod u+w -R ./vendor${NC}"
 # chmod u+w -R ./vendor 
 
-echo -e "${YELLOW}- chmod u+w -R ./static${NC}"
+echo -e "${YELLOW}$ rm -rf ./pub/static/*${NC}"
+rm -rf ./pub/static/*
+
+echo -e "${YELLOW}$ chmod u+w -R ./static${NC}"
 chmod u+w -R ./pub/static 
 
-echo -e "${YELLOW}- chmod u+w -R ./media${NC}"
+echo -e "${YELLOW}$ chmod u+w -R ./media${NC}"
 chmod u+w -R ./pub/media 
 
-echo -e "${YELLOW}- chmod u+w -R ./etc${NC}"
+echo -e "${YELLOW}$ chmod u+w -R ./etc${NC}"
 chmod u+w -R ./app/etc
 
-echo -e "${YELLOW}- chmod u+x ./bin/magento${NC}"
+echo -e "${YELLOW}$ chmod u+x ./bin/magento${NC}"
 chmod u+x ./bin/magento
+
+echo -e "${GREEN}Refazendo banco de dados...${NC}"
+
+mysql -u magento -pmagento -D magento -h <projeto>-db -e 'DROP DATABASE IF EXISTS magento; CREATE DATABASE magento;'
 
 echo -e "${GREEN}Instalando Magento...${NC}"
 
