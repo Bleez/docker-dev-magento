@@ -107,7 +107,9 @@ Uma vez dentro do container rode o comando `composer install` para instalar as d
 $ composer install
 ```
 
-Nesse momento o composer pedirá para você informar suas chaves de autenticação. Você pode conseguí-las seguinto [estas instruções](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html)
+Nesse momento o composer pedirá para você informar suas chaves de autenticação. Você pode conseguí-las seguinto [estas instruções](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html).
+
+> :warning: Guarde suas chaves em um local fácil, pois se você precisar executar `./update` no ambiente tudo será resetado e você precisará informar suas chaves novamente.
 
 Depois execute `install-magento` para fazer a instalação do Magento.
 
