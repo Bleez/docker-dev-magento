@@ -22,6 +22,7 @@ services:
     - ./image/bin/redis-flush:/usr/local/bin/redis-flush
     - ./image/bin/xdebug:/usr/local/bin/xdebug
     - ./image/extras/env.sample.php:/var/extras/env.sample.php
+    - ./image/extras/bashrc:/root/.bash_local
     
     networks:
     - <projeto>-network

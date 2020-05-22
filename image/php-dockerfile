@@ -77,8 +77,7 @@ COPY bin/* /usr/local/bin/
 COPY extras/* /var/extras/
 RUN chmod +x /usr/local/bin/*
 
-RUN echo "source /etc/bash_completion" >> /root/.bashrc
-RUN echo "source /etc/bash_completion" >> /var/extras/.bashrc
+RUN echo ". ~/.bash_local" >> /root/.bashrc
 
 RUN chmod 777 -Rf /var/www /var/www/.* \
 	&& chown -Rf www-data:www-data /var/www /var/www/.* \
