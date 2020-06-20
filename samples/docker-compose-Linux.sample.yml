@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  <projeto>-php:
+    
+    volumes:
+    - ./src:/var/www/:nocopy
+
+  <projeto>-nginx:
+    
+    volumes:
+    - ./src:/var/www/:nocopy

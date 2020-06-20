@@ -7,6 +7,8 @@ fi
 NOME_PASTA=${PWD##*/}
 
 rm -f .env docker-compose.yml \
+      docker-compose-$(uname -s).yml \
+      docker-sync.yml \
       shell \
       image/bin/install-magento \
       config/nginx.conf \
@@ -14,6 +16,8 @@ rm -f .env docker-compose.yml \
       image/extras/env.sample.php \
 
 cp samples/docker-compose.sample.yml docker-compose.yml
+cp samples/docker-compose-$(uname -s).sample.yml docker-compose-$(uname -s).yml
+cp samples/docker-sync.sample.yml docker-sync.yml
 cp samples/shell.sample shell
 cp samples/install-magento.sample image/bin/install-magento
 cp samples/redis-flush.sample image/bin/redis-flush
@@ -27,6 +31,8 @@ fi
 
 sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
           docker-compose.yml \
+          docker-compose-$(uname -s).yml \
+          docker-sync.yml \
           shell \
           image/bin/install-magento \
           image/bin/redis-flush \
@@ -35,10 +41,9 @@ sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
 
 sed -i '' -e  "s#<path-local>#$PWD#g" .env;
 
-if [ "$(uname)" == "Darwin" ]; then
-  sed -i '' -e "s/\${REMOTE_HOST}/host.docker.internal/g" docker-compose.yml;
-fi
 
 sudo chmod u+x install kill logs shell start stop update
 
-echo "Concluído. Para iniciar execute ./start"
+echo "Concluído. Para iniciar execute: ./start"
+
+

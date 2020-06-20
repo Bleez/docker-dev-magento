@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-docker-compose stop
-docker-compose down -v
+
+if [ "$(uname)" == "Darwin" ]; then
+  docker-sync-stack clean
+else
+  docker-compose stop
+  docker-compose down -v
+fi
 
 echo "Containers removidos com sucesso."

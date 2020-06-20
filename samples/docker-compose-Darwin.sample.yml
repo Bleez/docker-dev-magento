@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  <projeto>-php:
+    
+    volumes:
+    - <projeto>-sync:/var/www/:nocopy
+
+  <projeto>-nginx:
+    
+    volumes:
+    - <projeto>-sync:/var/www/:nocopy
+
+volumes:
+
+  <projeto>-sync:
+    external: true

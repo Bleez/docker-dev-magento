@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
-docker-compose -f docker-compose.yml -f docker-compose.custom.yml  up -d
-echo "
-===================== 🚀 Done 🚀 ===================
 
-      Created by Bruno Viana 😎
-      Access your new links:
+if [ "$(uname)" == "Darwin" ]; then
+  docker-sync-stack start
+else
+  docker-compose -f docker-compose.yml -f docker-compose-Linux.yml -f docker-compose.custom.yml  up -d
+fi
 
-      🌎 Web server: http://127.0.0.1/
-      ⚙️ PHPMyAdmin: http://127.0.0.1:8080
-      ✉️ Local emails: http://127.0.0.1:8025
 
-===================== 🚀 Done 🚀 ==================="
+# echo "
+# ===================== 🚀 Done 🚀 ===================
+
+#       Created by Bruno Viana 😎
+#       Access your new links:
+
+#       🌎 Web server: http://127.0.0.1/
+#       ⚙️ PHPMyAdmin: http://127.0.0.1:8080
+#       ✉️ Local emails: http://127.0.0.1:8025
+
+# ===================== 🚀 Done 🚀 ==================="
