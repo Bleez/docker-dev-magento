@@ -2,7 +2,7 @@
 
 Esse repositório contém um ambiente de desenvolvimento com instaladores automaticos e comandos pré-definidos para facilitar o desenvolvimento de pacotes dentro do Magento 2.
 
-Para esse SDK funcionar é necessário que você tenha o [Docker](https://docs.docker.com/docker-for-mac/install/) e [Docker Compose](https://docs.docker.com/compose/install/#install-compose) instalado.
+Para esse SDK funcionar é necessário que você tenha o [Docker](https://docs.docker.com/docker-for-mac/install/) e [Docker Compose](https://docs.docker.com/compose/install/#install-compose) instalado. Caso você esteja usando OSX é necessário o [Docker Sync](https://docker-sync.readthedocs.io/en/latest/getting-started/installation.html).
 
 
 Uma vez que o repositório foi clonado e instalado você terá um ambiente com:
@@ -22,7 +22,7 @@ Uma vez que o repositório foi clonado e instalado você terá um ambiente com:
 ## Instalação
 
 ```bash
-$ git clone git@github.com:Bleez/docker-dev-magento.git magento-pacotes-bleez && cd magento-pacotes-bleez
+$ PROJETO="magento-pacotes-bleez" && git clone git@github.com:Bleez/docker-dev-magento.git $PROJETO && cd $PROJETO
 ```
 
 Você pode trocar `magento-pacotes-bleez` por qualquer outro nome de sua preferência.
@@ -33,43 +33,9 @@ Em seguida instale o ambiente rodando:
 $ ./install
 ```
 
-### Habilitando o NFS
+> O Comando `./install` também irá clonar o [Magento Bleez](https://github.com/Bleez/magento-dev-pacotes) próprio para desenvolvimento de pacotes. Ele contém comandos especiais para ajudar no desenvolvimento e testes dos pacotes. Consulte a página do repositório para saber mais.
 
-O Docker pode apresentar lentidões, principalmente no Mac. Isso acontece por conta da forma como o container sincroniza arquivos com host. Para aliviar essa lentidão a gente utiliza NFS nos volumes.
-
-**:warning: Esse passo é importantíssimo, não pule ele ou nada irá funcionar.**
-
-##### Configurações para OSX :apple:
-
-No Mac você só precisa rodar o arquivo `nfs.sh` disponível na pasta `/image`.
-
-```bash
-$ cd image
-
-$ sudo chmod +x nfs.sh
-
-$ ./nfs.sh
-```
-
-Informe `y` sempre que perguntar e aguarde concluir os ajustes.
-
-##### Configurações para Linux :penguin:
-
-No Linux tem um processo um pouco diferente para instalar o NFS. Siga os passos abaixo.
-
-```bash
-sudo apt install nfs-kernel-server -y 
-
-sudo groupadd docker && sudo usermod -aG docker $USER 
-```
-
-O comando abaixo compartilha a pasta `html` na pasta do seu usuário para ser usado pelos volumes do Docker. Se sua pasta for outra você deve mudar nesse comando.
-
-```bash
-echo "$HOME/html *(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
-
-sudo exportfs -a && sudo systemctl restart nfs-kernel-server
-```
+> Dica: Caso queira trabalhar com outro Magento no lugar do *Magento Bleez* você pode criar manuamente a apsta `src` e colocar seu Magento dentro. Faça isso ANTES de rodar o comando `./install`.
 
 ### Iniciando containers
 
@@ -84,9 +50,9 @@ $ ./start
 
 Este comando instalará todas as imagens que o Docker precisa para fazer o ambiente funcionar e iniciará os mesmos.
 
-> O Comando `./install` também irá clonar o [Magento Bleez](https://github.com/Bleez/magento-dev-pacotes) próprio para desenvolvimento de pacotes. Ele contém comandos especiais para ajudar no desenvolvimento e testes dos pacotes. Consulte a página do repositório para saber mais.
-
 Se você quiser parar os containers execute o comando `./stop`.
+
+Se você estiver usando OSX o docker ficará rodando no seu terminal quando executar `./start`. Nesse caso para parar os containers execute `CTRL + C`.
 
 Exemplo:
 ```bash
@@ -109,9 +75,11 @@ $ composer install
 
 Nesse momento o composer pedirá para você informar suas chaves de autenticação. Você pode conseguí-las seguinto [estas instruções](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html).
 
+> :warning: Dependendo do pacote que você estiver usando pode ser solicitado a chave OAuth do Github. [Siga essas instruções para pegá-la](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+
 > :warning: Guarde suas chaves em um local fácil, pois se você precisar executar `./update` no ambiente tudo será resetado e você precisará informar suas chaves novamente.
 
-Depois execute `install-magento` para fazer a instalação do Magento.
+Depois que o `composer install` terminar execute `install-magento` para fazer a instalação do Magento.
 
 ```bash
 $ install-magento
@@ -125,7 +93,7 @@ Uma vez instalado a loja estará disponível no endereço `http://127.0.0.1/`. P
 * **Login:** admin
 * **Senha:** admin1234
 
-> :warning: Não instale o Magento através do navegador. Use o instalador do ambiente.
+> Dica: Se você não quiser uma instalação com os valores padrões você pode acessar`http://127.0.0.1` e fazer sua própria instalação do Magento
 
 ## Entrando nos containers
 
@@ -143,6 +111,12 @@ Estes são os serviços disponíveis nesse comando:
 * nginx
 * db
 * phpmyadmin
+
+## Personalizando seu docker-compose.yml
+
+Como o `docker-compose.yml` do ambiente é compilado e as vezes é necessário recompilá-lo, existe o arquivo `docker-compose.custom.yml` onde você pode colocar suas próprias definições do Docker Compose.
+
+Esse arquivo é apenas criado no momento da instalação e nunca mais é alterado pelo ambiente.
 
 ## Lista de comandos disponíveis
 
