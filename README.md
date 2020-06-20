@@ -95,6 +95,21 @@ Uma vez instalado a loja estará disponível no endereço `http://127.0.0.1/`. P
 
 > Dica: Se você não quiser uma instalação com os valores padrões você pode acessar`http://127.0.0.1` e fazer sua própria instalação do Magento
 
+## Banco de dados
+
+Você pode acessar o banco de dados com as seguintes configurações:
+
+* **Host:** 127.0.0.1
+* **Porta:** 3306
+* **Login:** magento
+* **Senha:** magento
+
+> Por padrão a senha de root é **123**
+
+Você também pode utilizar o phpMyAdmin acessando `http://127.0.0.1:8080`.
+
+> Dica: Você pode alterar a senha de root e as portas do banco e phpMyAdmin alterando o `.env`
+
 ## Entrando nos containers
 
 Pode acontecer casos que você precise entrar dentro de um dos containers. Caso você tenha essa necessidade você pode fazer isso usando o comando `./shell <servico>`.
