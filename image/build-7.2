@@ -3,5 +3,5 @@ if [ "$1" == "" ]; then
   exit;
 fi
 
-docker build . -f php-dockerfile -t brunoviana/magento-php-7.2:latest
+docker build . -f php-dockerfile-7.2 -t brunoviana/magento-php-7.2:latest
 docker tag brunoviana/magento-php-7.2:latest brunoviana/magento-php-7.2:$1
