@@ -141,146 +141,47 @@ Abaixo a lista de todos os comandos disponíveis no ambiente.
 
 Os comandos abaixo devem ser executados na rais do ambiente
 
-#### ./start
 
-Inicia os containers que farão o ambiente funcionar.
+| Comando  | Descriçao  | Opçoes & Exemplos |
+|---|---|---|
+| `./start` | Inicia os containers que farão o ambiente funcionar.      | |
+| `./stop`  | Desliga os containers sem destruí-los.        | |
+| `./kill` | Desliga e destrói todos os containers, volumes, networks e imagens usadas. Os arquivos do ambiente e do magento dentro de `/src` **não são excluídos**.                     |  |
+| `./logs`  | Mostra na tela o logs de execução de todos os containers. Ideal para entender se algum container teve problema para iniciar.       | |
+| `./shell`  | Entra dentro do container de um determinado serviço.        | `./shell php`|
+| `./update`  | Atualiza ambiente com as últimas modificações. ||
 
-Exemplo
+> O comando ./update não exclui o conteúdo da pasta /src mas refaz todos os containers, portanto tudo que tiver no banco de dados será perdido e o Magento deve ser instalado novamente.
+
+
+#### Exemplo:
+
 ```bash
 $ ./start
 ```
 
-#### ./stop
 
-Desliga os containers sem destruí-los.
-
-Exemplo
-```bash
-$ ./stop
-```
-
-#### ./kill
-
-Desliga e destrói todos os containers, volumes, networks e imagens usadas. Os arquivos do ambiente e do magento dentro de `/src` **não são excluídos**.
-
-Exemplo
-```bash
-$ ./kill
-```
-
-#### ./logs
-
-Mostra na tela o logs de execução de todos os containers. Ideal para entender se algum container teve problema para iniciar.
-
-Exemplo
-```bash
-$ ./logs
-```
-
-#### ./shell
-
-Entra dentro do container de um determinado serviço.
-
-Exemplo
-```bash
-$ ./shell php
-```
-
-#### ./update
-
-Atualiza ambiente com as últimas modificações.
-
-> Este comando não exclui o conteúdo da pasta /src mas refaz todos os containers, portanto tudo que tiver no banco de dados será perdido e o Magento deve ser instalado novamente.
-
-Exemplo
-```bash
-$ ./update
-```
 
 ### Comandos para trabalhar com Magento
 
 Os comando abaixo devem ser executados dentro do container `php` através do comando `./shell php`.
 
-#### install-magento
+| Comando  | Descriçao  | Opçoes & Exemplos |
+|---|---|---|
+| `install-magento` | Executa instalação do Magento que está instalado na dentro de `/src`. Se você executar este comando com um Magento já instalado tudo será apagado e uma nova instalação será feita.||      
+| `redis-flush`  | Limpa todo o Redis, tanto o cache de arquivos como a sessão.        | |
+| `xdebug`  | Habilita ou desabilita o uso do Xdebug ao rodar o PHP via linha de comando.       | |
+| `m2_upgrade`  | Limpa a pasta `/var` e roda o `setup:upgrade`        | |
+| `m2_clear`  | Limpa a pasta `/var` e apaga todos os arquivos compilados pelo Magento (`/generated` e `/pub/static`).        | |
+| `m2_deploy`  | Limpa tudo rodando `m2_clear` e em seguida roda `setup:static-content:deploy pt_BR -f`.        | |
+| `m2_reindex`  | Reindexa a loja inteira       | |
+| `m2_collect_phrases`  | Executa `i18n:collect-phrases` dentro da pasta do tema do cliente (`/app/project/tema-do-cliente`) especificado por parâmetro.        | |
+| `disable_fucking_modules`  | Desabilita modulos que não são necessários para desenvolvimento. Isso pode deixar o processamente e a velocidade do Magento mais leve.        | |
 
-Executa instalação do Magento que está instalado na dentro de `/src`.
 
-> Se você executar este comando com um Magento já instalado tudo será apagado e uma nova instalação será feita.
 
-Exemplo
+#### Exemplo
 ```bash
 $ install-magento
-```
-
-#### redis-flush
-
-Limpa todo o Redis, tanto o cache de arquivos como a sessão.
-
-Exemplo
-```bash
-$ redis-flush
-```
-
-#### xdebug
-
-Habilita ou desabilita o uso do Xdebug ao rodar o PHP via linha de comando.
-
-Exemplo
-```bash
-$ xdebug
-```
-
-#### m2_upgrade
-
-Limpa a pasta `/var` e roda o `setup:upgrade`
-
-Exemplo
-```bash
-$ m2_upgrade
-```
-
-#### m2_clear
-
-Limpa a pasta `/var` e apaga todos os arquivos compilados pelo Magento (`/generated` e `/pub/static`).
-
-Exemplo
-```bash
-$ m2_clear
-```
-
-#### m2_deploy
-
-Limpa tudo rodando `m2_clear` e em seguida roda `setup:static-content:deploy pt_BR -f`.
-
-Exemplo
-```bash
-$ m2_deploy
-```
-
-#### m2_reindex
-
-Reindexa a loja inteira
-
-Exemplo
-```bash
-$ m2_reindex
-```
-
-#### m2_collect_phrases
-
-Executa `i18n:collect-phrases` dentro da pasta do tema do cliente (`/app/project/tema-do-cliente`) especificado por parâmetro.
-
-Exemplo
-```bash
-$ m2_collect_phrases tema-do-cliente
-```
-
-#### disable_fucking_modules
-
-Desabilita modulos que não são necessários para desenvolvimento. Isso pode deixar o processamente e a velocidade do Magento mais leve.
-
-Exemplo
-```bash
-$ disable_fucking_modules
 ```
 
