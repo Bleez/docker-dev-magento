@@ -4,9 +4,9 @@ services:
   <projeto>-php:
     
     volumes:
-    - ./src:/var/www/:nocopy
+    - ./src:/var/www/
 
   <projeto>-nginx:
     
     volumes:
-    - ./src:/var/www/:nocopy
+    - ./src:/var/www/
