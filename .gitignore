@@ -10,5 +10,5 @@
 /image/extras/env.sample.php
 /image/bin/install-magento
 /docker-compose.custom.yml
-/docker-compose.Darwin.yml
-/docker-compose.Linux.yml
+/docker-compose-Darwin.yml
+/docker-compose-Linux.yml
