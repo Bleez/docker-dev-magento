@@ -12,3 +12,4 @@
 /docker-compose.custom.yml
 /docker-compose-Darwin.yml
 /docker-compose-Linux.yml
+/docker-sync.yml
