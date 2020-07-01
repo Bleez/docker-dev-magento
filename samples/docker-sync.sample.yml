@@ -41,7 +41,7 @@ syncs:
       'var/tmp',
       'node_modules',
       'generated',
-      'vendor',
+      #'vendor',
       'pub/static',
       'pub/media'
     ]
