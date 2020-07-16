@@ -42,7 +42,7 @@ sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
 sed -i '' -e  "s#<path-local>#$PWD#g" .env;
 
 
-sudo chmod u+x install kill logs shell start stop update
+sudo chmod u+x install kill logs shell start stop update root
 
 echo "Concluído. Para iniciar execute: ./start"
 
