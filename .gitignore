@@ -4,6 +4,7 @@
 /.env
 /docker-compose.yml
 /shell
+/root
 /image/bin/install-magento2
 /image/bin/redis-flush
 /config/nginx.conf

@@ -10,6 +10,7 @@ rm -f .env docker-compose.yml \
       docker-compose-$(uname -s).yml \
       docker-sync.yml \
       shell \
+      root \
       image/bin/install-magento \
       config/nginx.conf \
       image/bin/redis-flush \
@@ -19,6 +20,7 @@ cp samples/docker-compose.sample.yml docker-compose.yml
 cp samples/docker-compose-$(uname -s).sample.yml docker-compose-$(uname -s).yml
 cp samples/docker-sync.sample.yml docker-sync.yml
 cp samples/shell.sample shell
+cp samples/root.sample root
 cp samples/install-magento.sample image/bin/install-magento
 cp samples/redis-flush.sample image/bin/redis-flush
 cp samples/nginx.sample.conf config/nginx.conf
@@ -34,6 +36,7 @@ sed -i '' -e "s/<projeto>/$NOME_PASTA/g" \
           docker-compose-$(uname -s).yml \
           docker-sync.yml \
           shell \
+          root \
           image/bin/install-magento \
           image/bin/redis-flush \
           image/extras/env.sample.php \
