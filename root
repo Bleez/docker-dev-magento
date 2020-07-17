@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker exec --user=root -it docker-inux-$1 /bin/bash
