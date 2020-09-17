@@ -28,6 +28,7 @@ RUN apt-get update \
 	curl \
 	lynx \
 	psmisc \
+	cron \
 	unzip \
 	libzip-dev \
 	tar \
@@ -80,12 +81,28 @@ RUN chmod +x /usr/local/bin/*
 
 #RUN echo ". ~/.bash_local" >> /root/.bashrc
 
-RUN chmod 777 -Rf /var/www /var/www/.* \
-	&& chown -Rf www-data:www-data /var/www /var/www/.* \
-	&& usermod -u 1000 www-data \
-	&& chsh -s /bin/bash www-data
+#RUN chmod 777 -Rf /var/www /var/www/.* \
+#	&& chown -Rf www-data:www-data /var/www /var/www/.* \
+#	&& usermod -u 1000 www-data \
+#	&& chsh -s /bin/bash www-data
 
 VOLUME /var/www
 WORKDIR /var/www
 
 EXPOSE 9000
+
+# Create the log file
+RUN touch /var/log/schedule.log
+RUN chmod 0777 /var/log/schedule.log
+
+# Add crontab file in the cron directory
+RUN touch /etc/cron.d/scheduler
+
+# Run the cron
+RUN crontab /etc/cron.d/scheduler
+
+COPY ./entrypoint.sh /
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT /entrypoint.sh

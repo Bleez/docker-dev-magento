@@ -4,7 +4,7 @@ services:
   <projeto>-php:
     image: brunoviana/magento-php-7.3
     
-    user: '1000:33'
+#    user: '1000:33'
     
     container_name: <projeto>-php
     
